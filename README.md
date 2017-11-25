@@ -1,5 +1,7 @@
 # kube-keepalived-vip-arm
 
+[![Build Status](https://travis-ci.org/superbrothers/kube-keepalived-vip-arm.svg?branch=master)](https://travis-ci.org/superbrothers/kube-keepalived-vip-arm)
+
 This docker image is kube-keepalived-vip for arm32. See https://github.com/kubernetes/contrib/tree/master/keepalived-vip for more details.
 
 - https://hub.docker.com/r/superbrothers/kube-keepalived-vip-arm/

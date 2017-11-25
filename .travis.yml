@@ -5,6 +5,10 @@ language: bash
 env:
   global:
   - IMAGE=superbrothers/kube-keepalived-vip-arm
+addons:
+  apt:
+    packages:
+    - docker-ce
 script:
 # prepare qemu
 - docker run --rm --privileged multiarch/qemu-user-static:register --reset

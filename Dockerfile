@@ -35,7 +35,7 @@ FROM golang:1.9
 COPY --from=0 /contrib/keepalived-vip /go/src/keepalived-vip
 RUN set -x && \
  cd /go/src/keepalived-vip && \
- CGO_ENABLED=0 GOOS=linux GOARCH=arm go build -a -ldflags '-w' -o /kube-keepalived-vip
+ CGO_ENABLED=0 GOOS=linux GOARCH=arm GOARM=7 go build -a -ldflags '-w' -o /kube-keepalived-vip
 
 FROM gcr.io/google_containers/ubuntu-slim-arm:0.14
 

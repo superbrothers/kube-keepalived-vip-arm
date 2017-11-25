@@ -15,13 +15,15 @@ script:
 # build image
 - docker build -t "$IMAGE" .
 # push image
+- docker login -u="$DOCKER_USER" -p="$DOCKER_PASS"
 - >
   if [ "$TRAVIS_BRANCH" == "master" ] && [ "$TRAVIS_PULL_REQUEST" == "false" ]; then
-    docker login -u="$DOCKER_USER" -p="$DOCKER_PASS"
     docker push "$IMAGE"
   fi
 - >
   if [ -n "$TRAVIS_TAG" ]; then
+    docker push "$IMAGE"
+
     docker tag "$IMAGE" "$IMAGE:$TRAVIS_TAG"
     docker push "$IMAGE:$TRAVIS_TAG"
   fi

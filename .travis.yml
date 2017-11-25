@@ -1,0 +1,22 @@
+sudo: required
+services:
+- docker
+language: bash
+env:
+  global:
+  - IMAGE=superbrothers/kube-keepalived-vip-arm
+script:
+# prepare qemu
+- docker run --rm --privileged multiarch/qemu-user-static:register --reset
+# build image
+- docker build -t "$IMAGE" .
+# push image
+- >
+  if [ "$TRAVIS_BRANCH" == "master" ] && [ "$TRAVIS_PULL_REQUEST" == "false" ]; then
+    docker login -u="$DOCKER_USER" -p="$DOCKER_PASS"
+    docker push "$IMAGE"
+  fi
+  if [ -n "$TRAVIS_TAG" ]; then
+    docker tag "$IMAGE" "$IMAGE:$TRAVIS_TAG"
+    docker push "$IMAGE:$TRAVIS_TAG"
+  fi
